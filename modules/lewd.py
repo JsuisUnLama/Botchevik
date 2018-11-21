@@ -13,7 +13,9 @@ class Lewd:
 
     @commands.command(name='sauce?', pass_context=True)
     async def sauce(self, ctx):
-        r = requests.get('https://nhentai.net/random/', allow_redirects=False)
+        headers = {'User-Agent': 'Botchevik/1.0'}
+        r = requests.get('https://nhentai.net/random/', allow_redirects=False, headers=headers)
+
         m = re.search(r'/g/(\d{1,6})/', r.headers['Location'])
 
         if not m:
