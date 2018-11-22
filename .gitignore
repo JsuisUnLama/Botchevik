@@ -1,2 +1,4 @@
 config/secrets.py
 .idea/*
+botchevik.db
+discord.log

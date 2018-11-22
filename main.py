@@ -16,7 +16,7 @@ module_bot = [
     'lewd',
     #'meme',
     #'na',
-    #'picture',
+    'pikachuface',
     #'remind'
 ]
 
