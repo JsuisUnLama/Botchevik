@@ -22,7 +22,7 @@ class PikachuFace:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='pf', pass_context=True)
+    @commands.command(name='pf', description="A cute pikachu to react with :3")
     async def pf_retrieve(self, ctx, attr = "0"):
 
         # Connection to the database

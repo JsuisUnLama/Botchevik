@@ -18,7 +18,7 @@ class Lewd:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='sauce?', pass_context=True)
+    @commands.command(name='sauce?', description="When you want a random number  ( ͡° ͜ʖ ͡°)")
     async def sauce(self, ctx):
         headers = {'User-Agent': 'Botchevik/1.0'}
         r = requests.get('https://nhentai.net/random/', allow_redirects=False, headers=headers)
