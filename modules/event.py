@@ -5,17 +5,17 @@
 # Libraries
 import discord
 import logging
-from discord import guild
 
 # Create logger
 log = logging.getLogger(__name__)
+
 
 # Class
 class Event:
 
     # Init
     def __init__(self, bot):
-            self.bot = bot
+        self.bot = bot
 
     # Detecting new member
     async def on_member_join(self, member):
@@ -26,8 +26,7 @@ class Event:
         except Exception as e:
             print(e)
             log.warning("User " + member.name + " of id " + member.id + "could not receive the welcome message")
-            log.log(str(e))
-            return()
+            return
         
         # Generating welcome message
         link = "https://rp.kat.cafe/s/438385192978087936"
@@ -37,6 +36,7 @@ class Event:
 
         # Send welcome message
         await dm_channel.send(welcome_msg)
+
 
 # Setup
 def setup(bot):
