@@ -9,7 +9,7 @@ import sqlite3
 import discord
 import os.path
 from discord.ext import commands
-from discord import File
+from config.public import DATABASE_NAME
 from io import BytesIO
 
 # Create logger
@@ -26,8 +26,7 @@ class PikachuFace:
     async def pf_retrieve(self, ctx, attr = "0"):
 
         # Connection to the database
-        database = 'botchevik.db'
-        conn = sqlite3.connect(database)
+        conn = sqlite3.connect(DATABASE_NAME)
         
         # Managing the command
         try:
@@ -43,8 +42,7 @@ class PikachuFace:
                 await ctx.message.delete()
                 await ctx.send(file = discord.File(img.getvalue(), 'dummy.png'))
         except sqlite3.OperationalError as e:
-            log.error("Command has failed")
-            log.log(str(e))
+            log.error("Command has failed : " + str(e))
         finally:
             conn.close()
 
