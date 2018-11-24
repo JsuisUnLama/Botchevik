@@ -1,3 +1,9 @@
+# Command: sauce?
+# Arguments: / 
+# Description: fetch a random nhentai doujin and display its tags
+# Author: Someone who doesn't want to admit it
+
+# Libraries
 import re
 
 import requests
@@ -5,11 +11,12 @@ from discord.ext import commands
 from discord import Embed
 from discord import Colour
 
-
+# Class
 class Lewd:
+
+    # Init
     def __init__(self, bot):
         self.bot = bot
-
 
     @commands.command(name='sauce?', pass_context=True)
     async def sauce(self, ctx):
@@ -39,6 +46,6 @@ class Lewd:
 
         await ctx.send(embed=embed)
 
-
+# Setup
 def setup(bot):
     bot.add_cog(Lewd(bot))

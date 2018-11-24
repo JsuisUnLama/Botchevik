@@ -12,6 +12,7 @@ handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(me
 logger.addHandler(handler)
 
 module_bot = [
+    'event',
     #'flood',
     'lewd',
     #'meme',

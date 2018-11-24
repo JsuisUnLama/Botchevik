@@ -2,3 +2,6 @@ config/secrets.py
 .idea/*
 botchevik.db
 discord.log
+.rscs/*
+modules/__pycache__/*
+__pycache__/*
