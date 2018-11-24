@@ -16,7 +16,7 @@ module_bot = [
     #'flood',
     'lewd',
     #'meme',
-    #'na',
+    'not_assuming',
     'pikachuface',
     #'remind'
 ]

@@ -1,1 +1,2 @@
 DATABASE_NAME = "botchevik.db"
+MAX_NOT_ASSUMING_SECONDS = 120
