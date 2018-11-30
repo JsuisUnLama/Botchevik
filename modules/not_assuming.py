@@ -7,6 +7,8 @@ import asyncio
 
 class NotAssuming:
 
+    nan = {}
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -18,7 +20,23 @@ class NotAssuming:
         if not arg.isdigit():
             return
 
-        seconds = int(arg)
+        seconds = self._string_to_int(arg)
+
+        await asyncio.sleep(seconds)
+        await ctx.message.delete()
+
+    @commands.command(name="nan",
+                      brief="Delete the next message you write after x seconds",
+                      description="Delete the next message after x seconds",
+                      usage="seconds")
+    async def nan(self, ctx, arg):
+        pass
+
+
+
+    @staticmethod
+    def _string_to_int(string):
+        seconds = int(string)
 
         if seconds == 0:
             seconds = MIN_NOT_ASSUMING_SECONDS
@@ -26,18 +44,8 @@ class NotAssuming:
         if seconds > MAX_NOT_ASSUMING_SECONDS:
             seconds = MAX_NOT_ASSUMING_SECONDS
 
-        await asyncio.sleep(seconds)
-        await ctx.message.delete()
+        return seconds
 
-# class NotAssumingNext:
-#
-#   def __init__(self,bot):
-#        self.bot = bot
-#
-#   @commands.command(name='nan',
-#                     brief="Delete your next message after x seconds",
-#                     description="Delete your next message after x seconds, provided you write it within the next " + MAX_NOT_ASSUMING_NEXT_SECONDS + " next seconds after this command",
-#                     usage="[seconds]")
 
 def setup(bot):
     bot.add_cog(NotAssuming(bot))
