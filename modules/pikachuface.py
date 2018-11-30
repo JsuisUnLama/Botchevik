@@ -1,8 +1,3 @@
-# Command: pf
-# Arguments: [type | int]
-# Description: post a pikachu face [of insanity level [int] or of type [type]]
-# Author: @JsuisUnLama
-
 # Libraries
 import logging
 import sqlite3
@@ -15,6 +10,7 @@ from discord import Colour
 from config.public import DATABASE_NAME
 from config.public import MIN_INSANITY_LEVEL
 from config.public import MAX_INSANITY_LEVEL
+from utils import errormanager as em
 
 # Create logger
 log = logging.getLogger(__name__)
@@ -26,46 +22,56 @@ class PikachuFace:
     def __init__(self, bot):
         self.bot = bot
 
+    # Command pf declaration
     @commands.command(name='pf', 
-                      aliases=['pikachu','pikachuface','surprisedpikachu'],
+                      aliases=['pikachu','pikachuface','spf'],
                       brief='react with a surprised pikachu face',
                       description="display a surprised pikachu face of intensity [int] or of type [type]",
                       usage="[int | type]")
-    async def pf_retrieve(self, ctx, attr = "0"):
+    async def pf(self, ctx, attr = "0"):
 
         # Connection to the database
-        conn = sqlite3.connect(DATABASE_NAME)
+        db = sqlite3.connect(DATABASE_NAME)
         
         # Managing help argument
-        if attr == "help":
-            cursor = conn.cursor()
+        if attr in ['help','getargs','ga']:
+            cursor = db.cursor()
             cursor.execute("SELECT name_pika FROM pikachus")
             response = cursor.fetchall()
             arglist = [n[0] for n in response]
 
             embed = Embed(color=Colour.gold(), title="😮 **Possible Arguments**")
             embed.add_field(name="Number", value= str(MIN_INSANITY_LEVEL) + " up to " + str(MAX_INSANITY_LEVEL))
-            embed.add_field(name="Type", value="`"+'`\n`'.join(arglist[MAX_INSANITY_LEVEL+1:])+"`", inline=False)
+            embed.add_field(name="Type", value="`"+'`\n`'.join(arglist[MAX_INSANITY_LEVEL+1:])+"`", inline=True)
 
             await ctx.send(embed=embed)
 
         # Managing command
         else:
             try:
-                cursor = conn.cursor()
+                cursor = db.cursor()
                 cursor.execute("SELECT image_pika FROM pikachus WHERE name_pika=?", (attr,))
                 response = cursor.fetchone()
+
+                # Does the attribute refer to anything ?
                 if(response is None):
-                    await ctx.send('⚠ **Error:** couldn\'t fetch any pikachu (argument ' + attr + ' not recognized) ⚠\n              You can find the possible arguments by writing `-pf help`')
-                else:
-                    response = response[0]
-                    img = BytesIO(open(os.path.join("res", "pikachuface", response), 'rb').read())
-                    await ctx.message.delete()
-                    await ctx.send(file = discord.File(img.getvalue(), 'dummy.png'))
+                    logMsg = "A user has failed to fetch a pikachu face from the database (arg was " + attr + ")"
+                    errMsg = "Couldn't fetch any pikachu (argument **" + attr + "** not recognized)"
+                    additionalInfo = "You can find the possible arguments by writing `-pf help`"
+                    em.manageLog(self,ctx,'e',logMsg)
+                    await em.manageErr(self,ctx,errMsg,additionalInfo)
+                    return
+                
+                # Display corresponding pikachu face
+                img = BytesIO(open(os.path.join("res", "pikachuface", response[0]), 'rb').read())
+                await ctx.message.delete()
+                await ctx.send(file = discord.File(img.getvalue(), 'dummy.png'))
+
             except sqlite3.OperationalError as e:
-                log.error("Command has failed : " + str(e))
+                logMsg = "Command has failed : " + str(e)
+                em.manageLog(self,ctx,'e',logMsg)
             finally:
-                conn.close()
+                db.close()
 
 # Setup
 def setup(bot):
