@@ -9,4 +9,12 @@ CREATE TABLE IF NOT EXISTS `memes` (
 	`name_meme`	TEXT NOT NULL UNIQUE,
 	`link_meme`	TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS `reminders` (
+	`id_reminder`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+	`uuid_reminder` TEXT NOT NULL UNIQUE,
+	`date_reminder` TIMESTAMP NO NULL,
+	`author_reminder`	INTEGER NOT NULL,
+	`text_reminder`	TEXT NOT NULL
+);
 COMMIT;
