@@ -7,16 +7,19 @@ CREATE TABLE IF NOT EXISTS `pikachus` (
 CREATE TABLE IF NOT EXISTS `memes` (
 	`id_meme`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`name_meme`	TEXT NOT NULL UNIQUE,
-	`link_meme`	TEXT NOT NULL UNIQUE
-	`is_special`	INTEGER NOT NULL,
-	
+	`link_meme`	TEXT NOT NULL UNIQUE,
+	`is_special`	INTEGER NOT NULL
 );
+
 CREATE TABLE IF NOT EXISTS `reminders` (
 	`id_reminder`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
 	`uuid_reminder` TEXT NOT NULL UNIQUE,
-	`date_reminder` TIMESTAMP NO NULL,
-	`author_reminder`	INTEGER NOT NULL,
-	`text_reminder`	TEXT NOT NULL
+	`date_reminder` TIMESTAMP NOT NULL,
+	`channel_reminder` TEXT NOT NULL,
+	`author_reminder` TEXT NOT NULL,
+	`text_reminder`	TEXT NOT NULL,
+  `interval_reminder` REAL NOT NULL DEFAULT 0,
+  `creation_reminder` TEXT NOT NULL
 );
 
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (1,'0','pf_il0.png');

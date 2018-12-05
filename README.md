@@ -2,7 +2,7 @@
 Discord bot tailored for the Git Gud Discord server.
 
 ## Requirement
-- Python 3.5+
+- Python 3.5.3+
 
 ## Installation
 
