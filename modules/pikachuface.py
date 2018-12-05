@@ -58,7 +58,7 @@ class PikachuFace:
                     logMsg = "A user has failed to fetch a pikachu face from the database (arg was " + attr + ")"
                     errMsg = "Couldn't fetch any pikachu (argument **" + attr + "** not recognized)"
                     additionalInfo = "You can find the possible arguments by writing `-pf help`"
-                    em.manageLog(self,ctx,'e',logMsg)
+                    log.error(logMsg)
                     await ctx.send(em.standardized_error(errMsg,additionalInfo))
                     return
                 
@@ -69,7 +69,7 @@ class PikachuFace:
 
             except sqlite3.OperationalError as e:
                 logMsg = "Command has failed : " + str(e)
-                em.manageLog(self,ctx,'e',logMsg)
+                log.error(logMsg)
             finally:
                 db.close()
 
