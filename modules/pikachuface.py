@@ -34,7 +34,7 @@ class PikachuFace:
         db = sqlite3.connect(DATABASE_NAME)
         
         # Managing help argument
-        if attr in ['help','getargs','ga']:
+        if attr in ['help','h','getargs','ga']:
             cursor = db.cursor()
             cursor.execute("SELECT name_pika FROM pikachus")
             response = cursor.fetchall()
