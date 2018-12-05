@@ -1,8 +1,6 @@
 # Libraries
 import logging
-import discord
-from discord import Embed
-from discord import Colour
+
 
 # Create logger
 log = logging.getLogger(__name__)
@@ -17,7 +15,6 @@ def manageLog(self, ctx, logUsage = 'l', logMsg = "Something went wrong"):
         log.error(logMsg)
     return
 
-# Error manager
-async def manageErr(self, ctx, errMsg = "Error", additionalInfo = ""):
-    await ctx.send('⚠    **Error:**    ⚠\n ' + errMsg + '\n' + additionalInfo)
-    return
+
+def standardized_error(error_msg, additional_info = ""):
+    return '🚨 | **Error:** `{}`\n{}'.format(error_msg, ("" if additional_info == "" else "🔸 | {}".format(additional_info)))

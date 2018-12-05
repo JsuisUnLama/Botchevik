@@ -18,7 +18,7 @@ module_bot = [
     #'meme',
     'not_assuming',
     'pikachuface',
-    #'remind'
+    'remind'
 ]
 
 if __name__ == '__main__':

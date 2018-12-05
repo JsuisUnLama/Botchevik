@@ -59,7 +59,7 @@ class PikachuFace:
                     errMsg = "Couldn't fetch any pikachu (argument **" + attr + "** not recognized)"
                     additionalInfo = "You can find the possible arguments by writing `-pf help`"
                     em.manageLog(self,ctx,'e',logMsg)
-                    await em.manageErr(self,ctx,errMsg,additionalInfo)
+                    await ctx.send(em.standardized_error(errMsg,additionalInfo))
                     return
                 
                 # Display corresponding pikachu face
