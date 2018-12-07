@@ -1,11 +1,14 @@
 # Libraries
 import re
 
-import requests
 from discord.ext import commands
 from discord import Embed
 from discord import Colour
-from config.public import USER_AGENT
+from utils import http, errormanager as em
+from config.public import ERROR_MESSAGE_DURATION
+import logging
+
+log = logging.getLogger(__name__)
 
 # Class
 class Lewd:
@@ -21,20 +24,40 @@ class Lewd:
                       description="Bring you a random doujin's ID while unveiling its tags",
                       usage="")
     async def sauce(self, ctx):
-        headers = {'User-Agent': USER_AGENT}
-        r = requests.get('https://nhentai.net/random/', allow_redirects=False, headers=headers)
+        r = await http.request('https://nhentai.net/random/', allow_redirects=False)
+        error_msg_for_users = em.standardized_error("Weird thing happened when I reached the 'site'. Please try back in a few minutes")
+
+        if r.status != 302:
+            log.error("Couldn't reach nhentai, got status code {}".format(r.status))
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            return
 
         m = re.search(r'/g/(\d{1,6})/', r.headers['Location'])
 
         if not m:
-            print("Couldn't retrieve id")
+            log.error("Couldn't retrieve the ID from the random route")
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            return
 
         dj_id = m.group(1)
-        r     = requests.get('https://nhentai.net/api/gallery/{id}'.format(id=dj_id))
-        data  = r.json()
+        r_gal = await http.request('https://nhentai.net/api/gallery/{id}'.format(id=dj_id))
+
+        if r_gal.status is not 200:
+            log.error("Couldn't retrieve the gallery with the ID ({}), got status code {}".format(dj_id, r_gal.status))
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            return
+
+        try :
+            data  = await r_gal.json()
+        except Exception as e:
+            log.error("Got error while parsing gallery response : " + str(e))
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            return
 
         if 'tags' not in data:
-            print("Couldn't retrieve tags")
+            log.error("Couldn't retrieve the gallery tags with the ID ({}), happened after json parsing".format(dj_id))
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            return
 
         tags_list = []
 
