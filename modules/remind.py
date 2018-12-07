@@ -1,12 +1,11 @@
 import sqlite3
 import uuid
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
 
 from discord import Embed, Colour
 from discord.ext import commands
 from utils.errormanager import standardized_error
 from config.public import DATABASE_NAME
-import discord
 import asyncio
 import logging
 import dateparser
@@ -60,9 +59,7 @@ class Remind:
     async def reminder(self, ctx, interval: float, date: str, *, text_to_remind: str):
         channel_id    = ctx.channel.id
         is_valid, res = self._is_valid_date(date)
-        print(ctx.message.mentions)
-        print(ctx.message.role_mentions)
-        print(text_to_remind)
+
 
         if not is_valid:
             await ctx.send(standardized_error(res))
@@ -114,9 +111,7 @@ class Remind:
                     modulo = hours % float(reminder["interval"])
 
                     if modulo >= 0.0 and modulo <= (1 / 60): # Error margin because it's executed every minute
-                        print(modulo)
                         ch = self.bot.get_channel(int(reminder["channel"]))
-                        print(ch)
                         embed = Embed(color=Colour.dark_red(), title="⏲ **Periodic reminder**", description="<@{}> asked me to remind you the message above".format(reminder["author"]))
                         await ch.send(content=reminder["text"],embed=embed)
 
