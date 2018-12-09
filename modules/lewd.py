@@ -5,7 +5,7 @@ from discord.ext import commands
 from discord import Embed
 from discord import Colour
 from utils import http, errormanager as em
-from config.public import ERROR_MESSAGE_DURATION
+from config.public import ERROR_MESSAGE_LIFETIME
 import logging
 
 log = logging.getLogger(__name__)
@@ -29,14 +29,14 @@ class Lewd:
 
         if r.status != 302:
             log.error("Couldn't reach nhentai, got status code {}".format(r.status))
-            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_LIFETIME)
             return
 
         m = re.search(r'/g/(\d{1,6})/', r.headers['Location'])
 
         if not m:
             log.error("Couldn't retrieve the ID from the random route")
-            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_LIFETIME)
             return
 
         dj_id = m.group(1)
@@ -44,19 +44,19 @@ class Lewd:
 
         if r_gal.status is not 200:
             log.error("Couldn't retrieve the gallery with the ID ({}), got status code {}".format(dj_id, r_gal.status))
-            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_LIFETIME)
             return
 
         try :
             data  = await r_gal.json()
         except Exception as e:
             log.error("Got error while parsing gallery response : " + str(e))
-            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_LIFETIME)
             return
 
         if 'tags' not in data:
             log.error("Couldn't retrieve the gallery tags with the ID ({}), happened after json parsing".format(dj_id))
-            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_DURATION)
+            await ctx.send(error_msg_for_users, delete_after=ERROR_MESSAGE_LIFETIME)
             return
 
         tags_list = []

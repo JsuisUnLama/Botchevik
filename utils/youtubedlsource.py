@@ -11,7 +11,7 @@ ffmpeg_options = {
 
 ytdl_format_options = {
     'format': 'bestaudio/best',
-    'outtmpl': './roxbot/cache/%(extractor)s-%(id)s-%(title)s.%(ext)s', # PATH A CHANGER
+    'outtmpl': './tmp/%(extractor)s-%(id)s-%(title)s.%(ext)s', # PATH A CHANGER
     'restrictfilenames': True,
     'noplaylist': True,
     'nocheckcertificate': True,
