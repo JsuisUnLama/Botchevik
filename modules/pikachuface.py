@@ -10,6 +10,7 @@ from discord import Colour
 from random import randint
 from config.public import DATABASE_NAME
 from config.public import ERROR_MESSAGE_LIFETIME
+from config.public import HELP_MESSAGE_LIFETIME
 from utils import errormanager as em
 
 # Create logger
@@ -60,7 +61,7 @@ class PikachuFace:
             embed.add_field(name="Insanity level", value= "`" + str(0) + "` up to `" + str(max_il) + "`", inline=False)
             embed.add_field(name="Type", value="`"+'`\n`'.join(pika_type)+"`", inline=False)
 
-            await ctx.send(embed=embed)
+            await ctx.send(embed=embed,delete_after=HELP_MESSAGE_LIFETIME)
 
         # Managing command 
         else:

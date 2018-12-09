@@ -4,6 +4,7 @@ from random import uniform
 from discord.ext import commands
 import logging
 import asyncio
+from config.public import FLOOD_COOLDOWN_TIME
 from config.public import NUMBER_OF_SUPER_MESSAGE
 from config.public import MIN_NUMBER_OF_MESSAGE
 from config.public import MAX_NUMBER_OF_MESSAGE
@@ -26,6 +27,7 @@ class QuestionMarkFlood:
         self.bot = bot
 
     # Command meme declaration
+    @commands.cooldown(rate=1,per=FLOOD_COOLDOWN_TIME)
     @commands.command(name='xQc chat', 
                       aliases=['xQc?','xqc?','???','wtf','wtf?'],
                       brief='??????????????????????????',

@@ -11,6 +11,7 @@ from discord.ext import commands
 from discord import Embed
 from discord import Colour
 from config.public import ERROR_MESSAGE_LIFETIME
+from config.public import HELP_MESSAGE_LIFETIME
 from config.public import DATABASE_NAME
 from config.public import USER_AGENT
 from utils import errormanager as em
@@ -49,7 +50,7 @@ class AudioMeme:
         db = sqlite3.connect(DATABASE_NAME)
 
         # Checking number of arguments
-        if name is "help" or link is "help":
+        if name == "help" or link == "help":
             logMsg = "addmeme command didn't met the requirements to fire arguments wise"
             errMsg = "You didn't provide enough argument (or the special one a.k.a. 'help')"
             additionalInfo = 'Usage: `' + ctx.command.name + ctx.command.usage + '`'
@@ -164,7 +165,7 @@ class AudioMeme:
                 else:
                     embed.add_field(name="Name", value="`"+'`\n`'.join(arglist)+"`", inline=False)
 
-                await ctx.send(embed=embed)
+                await ctx.send(embed=embed,delete_after=HELP_MESSAGE_LIFETIME)
 
             except sqlite3.OperationalError as e:
                 logMsg = "Command has failed : " + str(e)
@@ -267,7 +268,7 @@ class AudioMeme:
                 else:
                     embed.add_field(name="Name", value="`"+'`\n`'.join(arglist)+"`", inline=False)
 
-                await ctx.send(embed=embed)
+                await ctx.send(embed=embed,delete_after = HELP_MESSAGE_LIFETIME)
 
             except sqlite3.OperationalError as e:
                 logMsg = "Command has failed : " + str(e)
