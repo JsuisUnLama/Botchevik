@@ -37,8 +37,8 @@ INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (11,'neon','pf_neon
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (12,'love','pf_love.jpg');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (13,'holy','pf_holy.jpg');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (14,'neg','pf_neg.png');
-INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (15,'box','pf_box.jpg')
-INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (16,'deep','pf_deep.jpg')
-INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (17,'hollow','pf_hollow.jpg')
-INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (18,'woaw','pf_woaw.jpg')
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (15,'box','pf_box.jpg');
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (16,'deep','pf_deep.jpg');
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (17,'hollow','pf_hollow.jpg');
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (18,'woaw','pf_woaw.jpg');
 COMMIT;
