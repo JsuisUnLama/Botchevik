@@ -13,9 +13,9 @@ logger.addHandler(handler)
 
 module_bot = [
     'event',
-    #'flood',
+    'flood',
     'lewd',
-    #'audiomeme',
+    'audiomeme',
     'not_assuming',
     'pikachuface',
     'remind'
