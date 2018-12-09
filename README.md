@@ -12,7 +12,15 @@ Discord bot tailored for the Git Gud Discord server.
 ````bash
 pip install -r requirements.txt
 ````
-4. Launch the main script :
+4. Populate the database (Example on debian) :
+````bash
+sqlite3 botchevik.db < database.sql
+````
+5. (Linux) Maybe you will have to install the opus module :
+````bash
+apt-get install libopus0
+````
+6. Launch the main script :
 ````bash
 python main.py
 ```` 
