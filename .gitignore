@@ -6,3 +6,4 @@ botchevik.db
 __pycache__/
 venv/*
 ffmpeg-20181203-8ef0fda-win64-static/*
+tmp/*

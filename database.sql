@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS `reminders` (
   `creation_reminder` TEXT NOT NULL
 );
 
+-- INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES ()
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (1,'0','pf_il0.png');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (2,'1','pf_il1.png');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (3,'2','pf_il2.png');
@@ -36,6 +37,8 @@ INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (11,'neon','pf_neon
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (12,'love','pf_love.jpg');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (13,'holy','pf_holy.jpg');
 INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (14,'neg','pf_neg.png');
---INSERT INTO `memes` (id_meme,name_meme,link_meme,is_special) VALUES (1,'if she breath she a thot','https://www.youtube.com/watch?v=-VZpM0gVVi8',1);
---INSERT INTO `memes` (id_meme,name_meme,link_meme,is_special) VALUES (2,'maybe i''ll be tracer','https://www.youtube.com/watch?v=8_D-xS1_aik',1);
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (15,'box','pf_box.jpg')
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (16,'deep','pf_deep.jpg')
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (17,'hollow','pf_hollow.jpg')
+INSERT INTO `pikachus` (id_pika,name_pika,image_pika) VALUES (18,'woaw','pf_woaw.jpg')
 COMMIT;
