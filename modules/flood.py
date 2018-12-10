@@ -19,8 +19,9 @@ from config.public import WAITING_TIME_BEFORE_DELETION
 # Create logger
 log = logging.getLogger(__name__)
 
+
 # Class
-class QuestionMarkFlood:
+class Flood:
 
     # Init
     def __init__(self, bot):
@@ -84,4 +85,4 @@ class QuestionMarkFlood:
 
 # Setup
 def setup(bot):
-    bot.add_cog(QuestionMarkFlood(bot))
+    bot.add_cog(Flood(bot))

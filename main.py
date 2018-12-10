@@ -1,14 +1,21 @@
 from discord.ext import commands
 from config.secrets import TOKEN
+from time import gmtime
 import logging
 
 description = 'Bot tailored for Git Gud.'
 bot = commands.Bot(command_prefix='-', description=description)
 
-logger = logging.getLogger('discord')
+
+logging.getLogger('discord').setLevel(logging.INFO)
+logging.getLogger('discord.http').setLevel(logging.WARNING)
+
+logger = logging.getLogger()
 logger.setLevel(logging.INFO)
-handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
-handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+handler = logging.FileHandler(filename='botchevik.log', encoding='utf-8', mode='a')
+formatter = logging.Formatter('[%(asctime)s UTC] [%(levelname)s] %(name)s: %(message)s', '%Y-%m-%d %H:%M:%S')
+formatter.converter = gmtime
+handler.setFormatter(formatter)
 logger.addHandler(handler)
 
 module_bot = [
