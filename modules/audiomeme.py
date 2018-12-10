@@ -374,12 +374,13 @@ class AudioMeme:
     # Wait until completion
     async def wait_meme_completion(self, ctx):
         vc = ctx.voice_client
-        if self.is_itts: # Will work in v2 I swear 
-            vc.play(discord.FFmpegPCMAudio(os.path.join('res', 'memes', 'itts.mp3')))
-            self.bot.loop.create_task(self.wait_meme_completion(ctx))
-        else:
-            while vc.is_playing():
-                await asyncio.sleep(1)
+        log.log("In v2, it should display Papa Franku's 'It's time to stop', just so you know")
+        #if self.is_itts: # Will work in v2 I swear 
+            #vc.play(discord.FFmpegPCMAudio(os.path.join('res', 'memes', 'itts.mp3')))
+            #self.bot.loop.create_task(self.wait_meme_completion(ctx))
+        #else:
+        while vc.is_playing():
+            await asyncio.sleep(1)
         
         await vc.disconnect()
 
