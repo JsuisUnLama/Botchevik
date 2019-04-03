@@ -25,7 +25,8 @@ module_bot = [
     'audiomeme',
     'not_assuming',
     'pikachuface',
-    'remind'
+    'remind',
+    'error_handler'
 ]
 
 if __name__ == '__main__':
