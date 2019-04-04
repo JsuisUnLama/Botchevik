@@ -28,3 +28,9 @@ MAX_QUESTION_MARKS_PER_PARTS = 16
 RANDOM_WTF_CHANCE = 0.2
 RANDOM_SPACE_CHANCE = 0.05
 WAITING_TIME_BEFORE_DELETION = 5
+
+# Lewd things
+# nhentai disabled their API, if it come back, just switch to on :)
+# False = Web scrapping
+# True  = Call to the api
+LEWD_USE_API=False
