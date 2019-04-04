@@ -7,7 +7,9 @@ class ErrorHandler:
         self.bot = bot
 
     async def on_command_error(self, ctx, error):
-        log_msg = f"The message : '{ctx.message.content}' posted by {str(ctx.author)} generated the following error : {type(error).__name__}"
+        error = getattr(error, "original", error)
+
+        log_msg = f"The message : '{ctx.message.content}' posted by {str(ctx.author)} generated the following error : {str(error)}"
         log.error(log_msg)
 
 
