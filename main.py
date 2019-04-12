@@ -26,7 +26,8 @@ module_bot = [
     'not_assuming',
     'pikachuface',
     'remind',
-    'error_handler'
+    'error_handler',
+    'misc'
 ]
 
 if __name__ == '__main__':
