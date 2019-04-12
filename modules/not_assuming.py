@@ -5,7 +5,7 @@ from config.public import MAX_NOT_ASSUMING_NEXT_SECONDS
 import asyncio
 
 
-class NotAssuming:
+class NotAssuming(commands.Cog):
 
     nan = {}
 

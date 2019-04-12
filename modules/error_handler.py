@@ -1,8 +1,8 @@
 import logging
-
+from discord.ext import commands
 log = logging.getLogger(__name__)
 
-class ErrorHandler:
+class ErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

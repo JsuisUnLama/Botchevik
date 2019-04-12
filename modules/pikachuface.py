@@ -17,7 +17,7 @@ from utils import errormanager as em
 log = logging.getLogger(__name__)
 
 # Class
-class PikachuFace:
+class PikachuFace(commands.Cog):
 
     # Init
     def __init__(self, bot):
@@ -89,7 +89,7 @@ class PikachuFace:
                 # Display corresponding pikachu face
                 img = BytesIO(open(os.path.join("res", "pikachuface", response[0]), 'rb').read())
                 await ctx.message.delete()
-                await ctx.send(file = discord.File(img.getvalue(), 'dummy.png'))
+                await ctx.send(file = discord.File(fp=img, filename='dummy.png'))
 
             except sqlite3.OperationalError as e:
                 logMsg = "Command has failed : " + str(e)

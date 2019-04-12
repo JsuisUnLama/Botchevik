@@ -3,4 +3,4 @@ websockets==6.0
 dateparser
 youtube_dl
 beautifulsoup4
-git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
+discord.py[voice]

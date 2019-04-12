@@ -5,13 +5,14 @@
 # Libraries
 import discord
 import logging
+from discord.ext import commands
 
 # Create logger
 log = logging.getLogger(__name__)
 
 
 # Class
-class Event:
+class Event(commands.Cog):
 
     # Init
     def __init__(self, bot):

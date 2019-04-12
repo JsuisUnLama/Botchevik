@@ -14,7 +14,7 @@ import dateparser
 log = logging.getLogger(__name__)
 
 
-class Remind:
+class Remind(commands.Cog):
 
     def __init__(self, bot):
         self.rmdb = ReminderDB()

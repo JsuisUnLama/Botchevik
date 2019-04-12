@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 
 
 # Class
-class Flood:
+class Flood(commands.Cog):
 
     # Init
     def __init__(self, bot):

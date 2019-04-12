@@ -31,7 +31,7 @@ async def on_error(self, event, vc, db):
     db.close()
 
 # Class
-class AudioMeme:
+class AudioMeme(commands.Cog):
 
     # Init
     def __init__(self, bot):

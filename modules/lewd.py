@@ -13,7 +13,7 @@ import logging
 log = logging.getLogger(__name__)
 
 # Class
-class Lewd:
+class Lewd(commands.Cog):
 
     # Init
     def __init__(self, bot):
