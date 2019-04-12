@@ -38,7 +38,7 @@ class Miscellaneous(commands.Cog):
             url_found.append(url.format(**data))
 
         for url in url_found:
-            embed = Embed(color=Colour.blurple(), title="✨ **Steal Emote**")
+            embed = Embed(color=Colour.blurple(), title="🕵️ **Steal Emoji**")
             embed.add_field(name="Thief", value="<@{}>".format(ctx.author.id))
             embed.set_thumbnail(url=url)
             embed.add_field(name="Url", value=url)
