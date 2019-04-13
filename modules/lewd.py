@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord import Embed
 from discord import Colour
 from utils import errormanager as em
+from utils import checks
 from config.public import ERROR_MESSAGE_LIFETIME, LEWD_USE_API, USER_AGENT
 from bs4 import BeautifulSoup
 import aiohttp
@@ -19,12 +20,18 @@ class Lewd(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    #@self.sauce.error
+    #async def isnsfw_error(self, ctx, error):
+    #    if isinstance(error, commands.CheckFailure):
+    #        await ctx.send(em.standardized_error("This is not a NSFW channel ! Think about the kids man..."))
+
     # Command sauce? declaration
     @commands.command(name='sauce?', 
                       aliases=['sauce','s?','nh'],
                       brief='When you want a random number  ( ͡° ͜ʖ ͡°)',
                       description="Bring you a random doujin's ID while unveiling its tags",
                       usage="")
+    @checks.is_nsfw_or_dm()
     async def sauce(self, ctx):
         self.http_session   = aiohttp.ClientSession(loop=self.bot.loop, headers={'User-agent': USER_AGENT})
         error_msg_for_users = em.standardized_error("Weird thing happened when I reached the 'site'. Please try back in a few minutes")
@@ -61,6 +68,7 @@ class Lewd(commands.Cog):
             await ctx.send(embed=embed)
 
         await self.http_session.close()
+        await ctx.message.delete()
 
 
     async def retrieve_tags_by_api(self,id_gal):
@@ -100,6 +108,11 @@ class Lewd(commands.Cog):
 
             return [tag.find(text=True) for tag in tags]
 
+    @sauce.error
+    async def sauce_error(self, ctx, error):
+        if isinstance(error, commands.CheckFailure):
+            await ctx.send(em.standardized_error("Can't run this command here (check if this channel is NSFW)"),  delete_after=ERROR_MESSAGE_LIFETIME)
+            log.info("The 'sauce' command has been run in the '{}' channel and has generated a checkfailure".format(ctx.channel))
 
 
 # Setup
