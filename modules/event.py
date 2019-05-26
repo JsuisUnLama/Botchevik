@@ -19,6 +19,7 @@ class Event(commands.Cog):
         self.bot = bot
 
     # Detecting new member
+    @commands.Cog.listener()
     async def on_member_join(self, member):
 
         # Creating private channel discussion with member
@@ -30,13 +31,15 @@ class Event(commands.Cog):
             return
         
         # Generating welcome message
-        link = "https://rp.kat.cafe/s/438385192978087936"
-        welcome_msg = "Hey 👋! Congrats for having joined " + member.guild.name + " !\n" 
+        link = "https://roleypoly.com/s/" + str(member.guild.id)
+        welcome_msg = "Hey 👋 Congrats for having joined **" + member.guild.name + "** !\n"
         welcome_msg += "Please 🙏 assign yourself some juicy roles here:\n"
         welcome_msg += link
 
         # Send welcome message
         await dm_channel.send(welcome_msg)
+
+
 
 
 # Setup
