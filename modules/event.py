@@ -3,7 +3,7 @@
 # Author:
 
 # Libraries
-import discord
+from discord import Embed, Colour
 import logging
 from discord.ext import commands
 
@@ -39,7 +39,17 @@ class Event(commands.Cog):
         # Send welcome message
         await dm_channel.send(welcome_msg)
 
+    @commands.Cog.listener()
+    async def on_message(self, msg):
+        if msg.author.bot:
+            return
 
+        if self.bot.user in msg.mentions:
+            embed = Embed(
+                color=Colour.red(),
+                description="Oh, hey ! If you want to know all the commands I have, just type **" + self.bot.command_prefix + "help**"
+            )
+            await msg.channel.send(embed=embed)
 
 
 # Setup
