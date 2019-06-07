@@ -27,7 +27,8 @@ module_bot = [
     'pikachuface',
     'remind',
     'error_handler',
-    'misc'
+    'misc',
+    'spotify'
 ]
 
 if __name__ == '__main__':
