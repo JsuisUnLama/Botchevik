@@ -15,6 +15,7 @@ MAX_NOT_ASSUMING_NEXT_SECONDS = 20
 
 # Youtubedlsource util
 MEME_BASE_VOLUME = 0.75
+FFMPEG_EXECUTE_PATH = "ffmpeg"
 
 # flood module
 FLOOD_COOLDOWN_TIME = 60

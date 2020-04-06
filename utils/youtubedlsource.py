@@ -3,6 +3,7 @@ import discord
 import asyncio
 import functools
 from config.public import MEME_BASE_VOLUME
+from config.public import FFMPEG_EXECUTE_PATH
 
 ffmpeg_options = {
     'before_options': '-nostdin',
@@ -46,4 +47,4 @@ class YTDLSource(discord.PCMVolumeTransformer):
             # take first item from a playlist. This shouldn't need to happen but in case it does.
             data = data['entries'][0]
         filename = data['url'] if stream else ytdl.prepare_filename(data)
-        return self(discord.FFmpegPCMAudio(filename, options=ffmpeg_options), data=data, volume=volume)
+        return self(discord.FFmpegPCMAudio(filename, options=ffmpeg_options, executable=FFMPEG_EXECUTE_PATH), data=data, volume=volume)

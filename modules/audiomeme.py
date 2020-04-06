@@ -12,6 +12,7 @@ from discord import Embed
 from discord import Colour
 from config.public import ERROR_MESSAGE_LIFETIME
 from config.public import HELP_MESSAGE_LIFETIME
+from config.public import FFMPEG_EXECUTE_PATH
 from config.public import DATABASE_NAME
 from config.public import USER_AGENT
 from utils import errormanager as em
@@ -22,13 +23,14 @@ from utils import youtubedlsource as ys
 log = logging.getLogger(__name__)
 
 # Loading opus
-if not discord.opus.is_loaded():
-    discord.opus.load_opus('opus')
+#if not discord.opus.is_loaded():
+    #discord.opus.load_opus('opus')
 
 # On error
 async def on_error(self, event, vc, db):
     await vc.disconnect()
     db.close()
+
 
 # Class
 class AudioMeme(commands.Cog):
@@ -127,8 +129,7 @@ class AudioMeme(commands.Cog):
             log.error(logMsg)
         finally:
             db.close()
-
-
+            
 
     # Command delmeme declaration
     @commands.command(name='delmeme', 
@@ -341,10 +342,9 @@ class AudioMeme(commands.Cog):
                 if is_special[0] == 1:
                     meme = await ys.YTDLSource.from_url(link)
                 else:
-                    meme = discord.FFmpegPCMAudio(link)
-                
-                vc.play(meme)
-                self.bot.loop.create_task(self.wait_meme_completion(ctx))
+                    meme = discord.FFmpegPCMAudio(link, executable=FFMPEG_EXECUTE_PATH)
+
+                vc.play(discord.PCMVolumeTransformer(meme),after=lambda e : self.after_play(ctx))
                 return
             
             except sqlite3.OperationalError as e:
@@ -372,17 +372,23 @@ class AudioMeme(commands.Cog):
 
 
     # Wait until completion
-    async def wait_meme_completion(self, ctx):
+    def after_play(self, ctx):
         vc = ctx.voice_client
         log.info("In v2, it should display Papa Franku's 'It's time to stop', just so you know")
         #if self.is_itts: # Will work in v2 I swear 
             #vc.play(discord.FFmpegPCMAudio(os.path.join('res', 'memes', 'itts.mp3')))
             #self.bot.loop.create_task(self.wait_meme_completion(ctx))
         #else:
-        while vc.is_playing():
-            await asyncio.sleep(1)
+        #while vc.is_playing():
+        #    await asyncio.sleep(1)
+
+        disco = vc.disconnect()
+        fut = asyncio.run_coroutine_threadsafe(disco, self.bot.loop)
+        try:
+            fut.result()
+        except:
+            pass
         
-        await vc.disconnect()
 
 
 
