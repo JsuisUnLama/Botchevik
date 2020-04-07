@@ -29,7 +29,7 @@ class Flood(commands.Cog):
 
     # Command meme declaration
     @commands.cooldown(rate=1,per=FLOOD_COOLDOWN_TIME)
-    @commands.command(name='xQc chat', 
+    @commands.command(name='xQc_chat',
                       aliases=['xQc?','xqc?','???','wtf','wtf?'],
                       brief='??????????????????????????',
                       description="floods chat with question marks",
